@@ -113,11 +113,10 @@ public class GenerateDateSeries extends AbstractExampleSource {
 				 case "YEAR":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusYears(increment)) {
 					 values[0] = n;
-					 
-							
 					 	table.addDataRow(new DoubleArrayDataRow(values));
 					 }
 					 break;
+					 //just a new comment
 				 case "MONTH":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusMonths(increment)) {
 						 values[0] = n;
