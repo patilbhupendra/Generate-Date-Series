@@ -22,9 +22,18 @@ package com.rapidminer.operator;
 
 
 
+
+
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+
+
 
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.io.AbstractExampleSource;
@@ -34,6 +43,7 @@ import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeCategory;
 import com.rapidminer.parameter.ParameterTypeString;
 import com.rapidminer.tools.Ontology;
+import com.rapidminer.tools.RandomGenerator;
 import com.rapidminer.tools.expression.internal.function.statistical.Random;
 import com.rapidminer.example.Attribute;
 import com.rapidminer.example.table.AttributeFactory;
@@ -42,6 +52,7 @@ import com.rapidminer.example.table.DoubleArrayDataRow;
 import com.rapidminer.example.table.MemoryExampleTable;
 
 import org.jfree.data.time.Millisecond;
+import org.jfree.util.Log;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
@@ -67,6 +78,12 @@ public class GenerateDateSeries extends AbstractExampleSource {
 	private static final String[] INTERVALTYPE = new String[] { "YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"};
 	private static final int INTERVALTYPE_INDEX = 0;
 		
+	/**
+     * Logger instance.
+     */
+    private static final Logger LOGGER = Logger
+            .getLogger(GenerateDateSeries.class.getName());
+	
 	/**
 	 * 
 	 * @param description this is description
@@ -100,33 +117,48 @@ public class GenerateDateSeries extends AbstractExampleSource {
 			List<Attribute> attributes = new ArrayList<Attribute>();
 		
 			Attribute dateattribute = AttributeFactory.createAttribute("Date", Ontology.DATE_TIME);
+			
 			attributes.add(dateattribute);
 			
 			MemoryExampleTable table = new MemoryExampleTable(attributes);
-			double[] values = new double[1];
+			
 			int increment = getParameterAsInt(INTERVAL);
 			
-				
+			
 				 switch (getParameterAsString(PARAMETER_INTERVALTYPE))
 				 {
 				 
 				 case "YEAR":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusYears(increment)) {
-					 values[0] = n;
-					 	table.addDataRow(new DoubleArrayDataRow(values));
+						 double[] values = new double[1];
+						 values[0] = n.getMillis();
+						 LOGGER.log(Level.INFO, String.valueOf(values[0]));
+						 LOGGER.log(Level.INFO, String.valueOf(n.getMillis()));
+						 
+						// n.get
+						table.addDataRow(new DoubleArrayDataRow(values));
+					 	
+					 	
+					 // create data
+					//	RandomGenerator random = RandomGenerator.getRandomGenerator(this);
+					//	values[0] =random.nextDateInRange(new GregorianCalendar(2005, 1, 1).getTime(),
+					//			new GregorianCalendar(2008, 10, 30).getTime()).getTime();
+					 	
 					 }
 					 break;
 					 //just a new comment
 				 case "MONTH":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusMonths(increment)) {
-						 values[0] = n;
+						 double[] values = new double[1];
+						 values[0] = n.getMillis();
 						 table.addDataRow(new DoubleArrayDataRow(values));
 						 }
 					 break;
 				 	 
 				 case "DAY" : 
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusDays(increment)) {
-						 values[0] = n;
+						 double[] values = new double[1];
+						 values[0] =  n.getMillis();;
 						 table.addDataRow(new DoubleArrayDataRow(values));
 						 }
 					 
@@ -134,26 +166,31 @@ public class GenerateDateSeries extends AbstractExampleSource {
 					 
 				 case "HOUR":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusHours(increment)) {
-						 values[0] = n;
+						 double[] values = new double[1];
+						 values[0] = n.getMillis();
 						 table.addDataRow(new DoubleArrayDataRow(values));
 						 }
 						 break;
 				
 				 case "MINUTE" :
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusMinutes(increment)) {
-						 values[0] = n;
+						 double[] values = new double[1];
+						 values[0] =  n.getMillis();
 						 table.addDataRow(new DoubleArrayDataRow(values));
 						 }
 						 break;
 				 case "SECOND" :
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusSeconds(increment)) {
-						 values[0] = n;
+						 double[] values = new double[1];
+						 values[0] =  n.getMillis();
+						 
 						 table.addDataRow(new DoubleArrayDataRow(values));
 						 }
 						 break;
 				 case "MILLISECOND": 
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusMillis(increment)) {
-						 values[0] = n;
+						 double[] values = new double[1];
+						 values[0] =  n.getMillis();
 						 table.addDataRow(new DoubleArrayDataRow(values));
 						 }
 						 break;
