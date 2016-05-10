@@ -108,12 +108,13 @@ public class GenerateDateSeries extends AbstractExampleSource {
 		// Parsing the date
 		DateTime endTime = dtf.parseDateTime(getParameterAsString(ENDDATE));
 		
-		//int numberOfExamples =
+	
 		
-		//in hindsight you dont need to calculate number of rows
+		//numberofExamples may be needed to add the progress loop,
+		//todo
 		//	long numberOfExamples = 	calculateNumberOfExample(startTime, endTime);
 		
-		// create table
+	
 			List<Attribute> attributes = new ArrayList<Attribute>();
 		
 			Attribute dateattribute = AttributeFactory.createAttribute("Date", Ontology.DATE_TIME);
@@ -132,21 +133,13 @@ public class GenerateDateSeries extends AbstractExampleSource {
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusYears(increment)) {
 						 double[] values = new double[1];
 						 values[0] = n.getMillis();
-						 LOGGER.log(Level.INFO, String.valueOf(values[0]));
-						 LOGGER.log(Level.INFO, String.valueOf(n.getMillis()));
-						 
-						// n.get
+		
 						table.addDataRow(new DoubleArrayDataRow(values));
 					 	
 					 	
-					 // create data
-					//	RandomGenerator random = RandomGenerator.getRandomGenerator(this);
-					//	values[0] =random.nextDateInRange(new GregorianCalendar(2005, 1, 1).getTime(),
-					//			new GregorianCalendar(2008, 10, 30).getTime()).getTime();
-					 	
 					 }
 					 break;
-					 //just a new comment
+					
 				 case "MONTH":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusMonths(increment)) {
 						 double[] values = new double[1];
