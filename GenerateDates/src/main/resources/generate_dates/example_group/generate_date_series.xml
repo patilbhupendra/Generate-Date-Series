@@ -5,63 +5,83 @@
               xsi:schemaLocation="http://rapid-i.com/schemas/documentation/reference/1.0 ">
 
     <operator key="operator.generate_dates:example_operator_key" locale="en"
-              version="6.0.000">
-        <title>Example Operator</title>
-        <synopsis>This is an example Operator. It does nothing when being executed.
+              version="7.0.000">
+        <title>Generate Date Series</title>
+        <synopsis>Generate Date Time Series data given start and end timestamps and interval.
         </synopsis>
         <text>
-            <paragraph>First paragraph.</paragraph>
-            <paragraph>Second paragraph.</paragraph>
+            <paragraph></paragraph>
+            <paragraph></paragraph>
         </text>
         <inputPorts>
-            <port name="input" type="com.rapidminer.example.ExampleSet">
+           <!--   <port name="input" type="com.rapidminer.example.ExampleSet">
                 Input port description.
-            </port>
+            </port>-->
         </inputPorts>
         <outputPorts>
             <port name="output" type="com.rapidminer.example.ExampleSet">
-                Output port description.
+                Outputs an exampleset with one columns containing the dates.
             </port>
         </outputPorts>
 
         <!-- description of the parameters and the corresponding values -->
         <parameters>
             <parameter key="first_parameter" type="configurable">
-                Description here
+                Enter the start date
             </parameter>
             <parameter key="second_parameter" type="selection">
-                Description here
+                Format of the start date, some examples are
+                yyyy-MM-dd HH:mm:ss
+                
             </parameter>
             <parameter key="third_parameter" type="">
-                Description here
+                End data format. Date and time are checked to be less than this value during the generation, so will not be included.
+                Ensure you add a number higher than the last date you expect
+            </parameter>
+              <parameter key="fourth_parameter" type="">
+                Format of the end date, some examples are
+                yyyy-MM-dd HH:mm:ss
+            </parameter>
+              <parameter key="fifth_parameter" type="">
+               Interval values, provide number like 1 , 2 , 5 etc
+            </parameter>
+              <parameter key="sixth_paramter" type="">
+               Select the interval time frame.
             </parameter>
         </parameters>
 
-        <tutorialProcesses>
-            <tutorialProcess key="process.python.clustering" title="Clustering using Python">
+         <tutorialProcesses>
+            <tutorialProcess key="process.python.clustering" title="Generate Dates for Jan 2016">
                 <description>
                     <paragraph>
-                        Tutorial description here.
+                        Generates all dates for January 2016. Notice how the end date provided is February 1 instead of Jan 31st.
                     </paragraph>
                 </description>
-                <process version="6.4.000">
-                    <context>
-                        <input/>
-                        <output/>
-                        <macros/>
-                    </context>
-                    <operator activated="true" class="process" compatibility="6.4.000" expanded="true" name="Process">
-                        <process expanded="true">
-                            <operator activated="true" class="retrieve" compatibility="6.4.000" expanded="true" height="60" name="Retrieve Iris" width="90" x="380" y="210">
-                                <parameter key="repository_entry" value="//Samples/data/Iris"/>
-                            </operator>
-                            <connect from_op="Retrieve Iris" from_port="output" to_port="result 1"/>
-                            <portSpacing port="source_input 1" spacing="0"/>
-                            <portSpacing port="sink_result 1" spacing="0"/>
-                            <portSpacing port="sink_result 2" spacing="0"/>
-                        </process>
-                    </operator>
-                </process>
+              <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process version="7.1.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.1.000" expanded="true" name="Process">
+    <process expanded="true">
+      <operator activated="true" class="generate_dates:generate_date_series" compatibility="7.0.000" expanded="true" height="68" name="generate_date_series" width="90" x="313" y="85">
+        <parameter key="startdate" value="2016-01-01"/>
+        <parameter key="startdateformat" value="yyyy-MM-dd"/>
+        <parameter key="enddate" value="2016-02-01"/>
+        <parameter key="enddateformat" value="yyyy-MM-dd"/>
+        <parameter key="interval" value="1"/>
+        <parameter key="intervaltype" value="DAY"/>
+      </operator>
+      <connect from_op="generate_date_series" from_port="output" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>
+
             </tutorialProcess>
         </tutorialProcesses>
 

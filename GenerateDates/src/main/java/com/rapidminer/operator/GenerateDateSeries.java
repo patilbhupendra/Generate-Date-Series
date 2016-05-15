@@ -35,12 +35,14 @@ import java.util.logging.Logger;
 
 
 
+
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.io.AbstractExampleSource;
 
 
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeCategory;
+import com.rapidminer.parameter.ParameterTypeDateFormat;
 import com.rapidminer.parameter.ParameterTypeString;
 import com.rapidminer.tools.Ontology;
 import com.rapidminer.tools.RandomGenerator;
@@ -132,6 +134,9 @@ public class GenerateDateSeries extends AbstractExampleSource {
 				 case "YEAR":
 					 for (DateTime n = startTime; n.isBefore(endTime); n= n.plusYears(increment)) {
 						 double[] values = new double[1];
+						 
+						
+						 
 						 values[0] = n.getMillis();
 		
 						table.addDataRow(new DoubleArrayDataRow(values));
@@ -278,17 +283,13 @@ public class GenerateDateSeries extends AbstractExampleSource {
         types.add(new ParameterTypeString(STARTDATE, 
                 "start date", false));
 
-        types.add(new ParameterTypeString(STARTDATEFORMAT, 
-                "start date format", false));
-
-
+        
+        types.add(new ParameterTypeDateFormat(STARTDATEFORMAT,"start date format", false));
+ 
         types.add(new ParameterTypeString(ENDDATE, 
                 "end date", false));
 
-
-        types.add(new ParameterTypeString(ENDDATEFORMAT, 
-                "end date format", false));
-
+        types.add(new ParameterTypeDateFormat(ENDDATEFORMAT,"start date format", false));
 
         types.add(new ParameterTypeString(INTERVAL, 
                 "interval", false));
