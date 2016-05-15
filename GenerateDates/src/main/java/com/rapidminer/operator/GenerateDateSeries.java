@@ -67,7 +67,7 @@ import org.joda.time.format.DateTimeFormatter;
 /**
  * 
  * @author Bhupendra Patil
- *
+ **
  */
 public class GenerateDateSeries extends AbstractExampleSource {
 
